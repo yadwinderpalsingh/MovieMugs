@@ -31,7 +31,7 @@ public class PlayerStartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AppManager.setGameStart(true);
-                startActivity(new Intent(PlayerStartActivity.this, PlayerTurnActivity.class));
+                startActivity(new Intent(PlayerStartActivity.this, ClassifierActivity.class));
             }
         });
     }

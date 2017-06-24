@@ -39,7 +39,7 @@ import org.tensorflow.demo.env.ImageUtils;
 import org.tensorflow.demo.env.Logger;
 import org.tensorflow.demo.R;
 
-public class ClassifierActivity extends CameraActivity implements OnImageAvailableListener {
+public class ClassifierActivity extends PlayerTurnActivity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
 
   // These are the settings for the original v1 Inception model. If you want to
