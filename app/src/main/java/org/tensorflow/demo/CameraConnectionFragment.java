@@ -26,6 +26,7 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
+import android.graphics.Point;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -39,17 +40,20 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.text.TextUtils;
 import android.util.Size;
 import android.util.SparseIntArray;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,7 +72,7 @@ public class CameraConnectionFragment extends Fragment {
    * The camera preview size will be chosen to be the smallest frame by pixel size capable of
    * containing a DESIRED_SIZE x DESIRED_SIZE square.
    */
-  private static final int MINIMUM_PREVIEW_SIZE = 320;
+  private static int MINIMUM_PREVIEW_SIZE = 0;
 
   /**
    * Conversion from screen rotation to JPEG orientation.
@@ -312,6 +316,7 @@ public class CameraConnectionFragment extends Fragment {
   @Override
   public void onViewCreated(final View view, final Bundle savedInstanceState) {
     textureView = (AutoFitTextureView) view.findViewById(R.id.texture);
+    MINIMUM_PREVIEW_SIZE = getScreenHeight();
   }
 
   @Override
@@ -357,7 +362,7 @@ public class CameraConnectionFragment extends Fragment {
 
         // We don't use a front facing camera in this sample.
         final Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-        if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
+        if (facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
           continue;
         }
 
@@ -636,6 +641,20 @@ public class CameraConnectionFragment extends Fragment {
                 }
               })
           .create();
+    }
+  }
+  private int getScreenHeight(){
+    final WindowManager windowManager = getActivity().getWindowManager();
+    final Point size = new Point();
+    int screenHeight = 0;
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+      windowManager.getDefaultDisplay().getSize(size);
+      screenHeight = size.y;
+      return screenHeight;
+    } else {
+      Display d = windowManager.getDefaultDisplay();
+      screenHeight = d.getHeight();
+      return screenHeight;
     }
   }
 }
