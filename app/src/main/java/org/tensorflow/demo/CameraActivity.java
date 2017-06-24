@@ -33,6 +33,7 @@ import android.widget.Toast;
 import java.nio.ByteBuffer;
 import org.tensorflow.demo.env.Logger;
 import org.tensorflow.demo.R;
+import org.tensorflow.demo.model.AppManager;
 
 public abstract class CameraActivity extends Activity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
@@ -72,7 +73,7 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
   public synchronized void onResume() {
     LOGGER.d("onResume " + this);
     super.onResume();
-
+    AppManager.setActivity(this);
     handlerThread = new HandlerThread("inference");
     handlerThread.start();
     handler = new Handler(handlerThread.getLooper());
