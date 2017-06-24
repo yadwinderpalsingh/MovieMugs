@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v7.app.ActionBar;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
+
+import org.tensorflow.demo.R;
 
 import java.util.ArrayList;
 
@@ -107,6 +113,27 @@ public class AppManager {
         _isGameStart = false;
         _isSinglePlayer = false;
         _isMultiPlayer = false;
+    }
+
+
+
+
+
+    // Global Settings
+
+    public static void setCustomActionBar(ActionBar actionBar, View viewActionBar, String activityTitle){
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+        TextView textviewTitle = (TextView)viewActionBar.findViewById(R.id.action_bar_textview);
+        textviewTitle.setText(activityTitle);
+        actionBar.setCustomView(viewActionBar, params);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setIcon(R.color.colorPrimary);
+        actionBar.setHomeButtonEnabled(true);
     }
 
 }
