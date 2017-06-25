@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AppManager.setGameStart(true);
                 startActivity(new Intent(MainActivity.this, PlayerStartActivity.class));
+                overridePendingTransition(R.anim.anim_right, R.anim.anim_left);
             }
         });
     }
