@@ -19,4 +19,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorText">#a5a6ba</color>
+    <color name="colorTimerText">#41caf7</color>
 </resources>

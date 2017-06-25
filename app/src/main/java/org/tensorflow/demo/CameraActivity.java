@@ -26,8 +26,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Size;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 import java.nio.ByteBuffer;
@@ -35,7 +38,7 @@ import org.tensorflow.demo.env.Logger;
 import org.tensorflow.demo.R;
 import org.tensorflow.demo.model.AppManager;
 
-public abstract class CameraActivity extends Activity implements OnImageAvailableListener {
+public abstract class CameraActivity extends AppCompatActivity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
 
   private static final int PERMISSIONS_REQUEST = 1;
@@ -77,6 +80,11 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
     handlerThread = new HandlerThread("inference");
     handlerThread.start();
     handler = new Handler(handlerThread.getLooper());
+
+    final ActionBar actionBar = getSupportActionBar();
+    actionBar.setElevation(0);
+    View view = getLayoutInflater().inflate(R.layout.custom_actionbar, null);
+    AppManager.setCustomActionBar(actionBar, view, "Round 1");
   }
 
   @Override
