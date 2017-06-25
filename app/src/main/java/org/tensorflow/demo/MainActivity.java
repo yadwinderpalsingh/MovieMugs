@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import org.tensorflow.demo.model.AppManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ConstraintLayout _startBtn;
+    private LinearLayout _startBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         AppManager.setActivity(this);
 
-        _startBtn = (ConstraintLayout) findViewById(R.id.parentContainer);
+        _startBtn = (LinearLayout) findViewById(R.id.parentContainer);
 
         _startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppManager.setGameStart(true);
                 startActivity(new Intent(MainActivity.this, PlayerStartActivity.class));
+                overridePendingTransition(R.anim.anim_right, R.anim.anim_left);
             }
         });
     }

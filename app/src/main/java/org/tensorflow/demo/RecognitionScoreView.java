@@ -17,6 +17,7 @@ package org.tensorflow.demo;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -32,7 +33,9 @@ public class RecognitionScoreView extends View implements ResultsView {
   private final float textSizePx;
   private final Paint fgPaint;
   private final Paint bgPaint;
-
+  public float score = 0;
+  public float temp;
+    public String temp1;
   public RecognitionScoreView(final Context context, final AttributeSet set) {
     super(context, set);
 
@@ -43,7 +46,7 @@ public class RecognitionScoreView extends View implements ResultsView {
     fgPaint.setTextSize(textSizePx);
 
     bgPaint = new Paint();
-    bgPaint.setColor(0xcc4285f4);
+    bgPaint.setColor(Color.TRANSPARENT);
   }
 
   @Override
@@ -60,10 +63,18 @@ public class RecognitionScoreView extends View implements ResultsView {
     canvas.drawPaint(bgPaint);
 
     if (results != null) {
+
       for (final Recognition recog : results) {
-        canvas.drawText(recog.getTitle() + ": " + recog.getConfidence(), x, y, fgPaint);
-        y += fgPaint.getTextSize() * 1.5f;
+          canvas.drawText(recog.getTitle() + ": " + recog.getConfidence(), x, y, fgPaint);
+          temp = recog.getConfidence();
+          temp1 = recog.getTitle();
+          if (temp1 == "angry") {
+              score += temp;
+          }
+          y += fgPaint.getTextSize() * 1.5f;
       }
+      canvas.drawText("Score" + ": " + score, x, y, fgPaint);
+      y += fgPaint.getTextSize() * 1.5f;
     }
   }
 }
