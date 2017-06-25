@@ -20,4 +20,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorText">#a5a6ba</color>
     <color name="colorTimerText">#41caf7</color>
+    <color name="colorTimeUp">#2fc38d</color>
 </resources>
