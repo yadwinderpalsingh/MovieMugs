@@ -33,7 +33,7 @@ public class PlayerTurnActivity extends AppCompatActivity {
                 try {
                     //sleep thread for 2 seconds, time in milliseconds
                     sleep(3000);
-
+                    //sleep(10000);
                     //start new activity
                     Intent i=new Intent(PlayerTurnActivity.this, ClassifierActivity.class);
                     startActivity(i);

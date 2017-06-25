@@ -28,6 +28,7 @@ import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.SystemClock;
 import android.os.Trace;
+import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.Display;
@@ -127,7 +128,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             INPUT_NAME,
             OUTPUT_NAME);
 
-    resultsView = (ResultsView) findViewById(R.id.results);
+    //resultsView = (ResultsView) findViewById(R.id.results);
     previewWidth = size.getWidth();
     previewHeight = size.getHeight();
 
@@ -225,10 +226,15 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
           public void run() {
             final long startTime = SystemClock.uptimeMillis();
             final List<Classifier.Recognition> results = classifier.recognizeImage(croppedBitmap);
+            /*
+               int confidenceScore = result.get(0).getConfidence;
+               String emotion = result.get(0).getId;
+             */
+            Log.v("Scores: ", results.toString());
             lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
             cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
-            resultsView.setResults(results);
+            //resultsView.setResults(results);
             requestRender();
             computing = false;
           }

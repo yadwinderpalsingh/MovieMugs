@@ -17,6 +17,7 @@ package org.tensorflow.demo;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -43,7 +44,7 @@ public class RecognitionScoreView extends View implements ResultsView {
     fgPaint.setTextSize(textSizePx);
 
     bgPaint = new Paint();
-    bgPaint.setColor(0xcc4285f4);
+    bgPaint.setColor(Color.TRANSPARENT);
   }
 
   @Override
