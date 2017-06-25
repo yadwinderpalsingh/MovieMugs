@@ -1,6 +1,6 @@
 sad 
+afraid
 happy 
 angry
-surprised 
+shocked 
 neutral 
-frightened

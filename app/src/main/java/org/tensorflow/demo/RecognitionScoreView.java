@@ -20,6 +20,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -64,12 +65,13 @@ public class RecognitionScoreView extends View implements ResultsView {
 
     if (results != null) {
 
-      for (final Recognition recog : results) {
+      for (Recognition recog : results) {
           canvas.drawText(recog.getTitle() + ": " + recog.getConfidence(), x, y, fgPaint);
           temp = recog.getConfidence();
           temp1 = recog.getTitle();
-          if (temp1 == "angry") {
+          if (temp1.equals("happy")) {
               score += temp;
+              Log.v("Score: ", String.valueOf(score));
           }
           y += fgPaint.getTextSize() * 1.5f;
       }

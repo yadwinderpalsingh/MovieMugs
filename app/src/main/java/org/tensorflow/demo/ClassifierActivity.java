@@ -60,8 +60,8 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   // --output_node_names="final_result" \
   // --input_binary=true
   private static final int INPUT_SIZE = 299;
-  private static final int IMAGE_MEAN = 128;
-  private static final float IMAGE_STD = 128;
+  private static final int IMAGE_MEAN = 117;
+  private static final float IMAGE_STD = 1;
   private static final String INPUT_NAME = "Mul";
   private static final String OUTPUT_NAME = "final_result";
 
@@ -76,7 +76,9 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   private Classifier classifier;
 
   private Integer sensorOrientation;
-
+  private float temp;
+  private String temp1;
+  private int score;
   private int previewWidth = 0;
   private int previewHeight = 0;
   private byte[][] yuvBytes;
@@ -128,7 +130,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             INPUT_NAME,
             OUTPUT_NAME);
 
-    //resultsView = (ResultsView) findViewById(R.id.results);
+    resultsView = (ResultsView) findViewById(R.id.results);
     previewWidth = size.getWidth();
     previewHeight = size.getHeight();
 
@@ -167,7 +169,6 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   @Override
   public void onImageAvailable(final ImageReader reader) {
     Image image = null;
-
     try {
       image = reader.acquireLatestImage();
 
@@ -230,11 +231,10 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                int confidenceScore = result.get(0).getConfidence;
                String emotion = result.get(0).getId;
              */
-            Log.v("Scores: ", results.toString());
             lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
             cropCopyBitmap = Bitmap.createBitmap(croppedBitmap);
-            //resultsView.setResults(results);
+            resultsView.setResults(results);
             requestRender();
             computing = false;
           }
